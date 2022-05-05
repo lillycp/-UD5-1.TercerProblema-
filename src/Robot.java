@@ -1,11 +1,14 @@
+import com.generic.GenericStack;
+import com.utils.RobotsUtils;
+
 public class Robot {
 
     public String nombreRobot;
-    public boolean espacioCarga;
+    private GenericStack<Producto> espacioCarga = new GenericStack<Producto>();
 
-    public Robot(String nombreRobot, boolean espacioCarga) {
+
+    public Robot(String nombreRobot) {
         this.nombreRobot = nombreRobot;
-        this.espacioCarga = espacioCarga;
     }
 
     public String getNombreRobot() {
@@ -16,13 +19,20 @@ public class Robot {
         this.nombreRobot = nombreRobot;
     }
 
-    public boolean isEspacioCarga() {
-        return espacioCarga;
+    //crear robot
+    public static Robot generateRobot() {
+        Robot robot = new Robot(RobotsUtils.generarNombreRobot());
+        int numProductos = (int) RobotsUtils.generarNumeroAleatorio(5);
+        for (int i = 0; i < numProductos; i++) {
+            robot.anyadirProducto();
+        }
+        return robot;
     }
 
-    public void setEspacioCarga(boolean espacioCarga) {
-        this.espacioCarga = espacioCarga;
+    public void anyadirProducto() {
+        Producto producto = Producto.generarProducto();
+        System.out.println("El robot " + getNombreRobot() + " apila " + producto);
+        espacioCarga.push(producto);
     }
-
 
 }

@@ -1,3 +1,5 @@
+import com.utils.RobotsUtils;
+
 public class Producto {
 
     public String nombre;
@@ -22,6 +24,13 @@ public class Producto {
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    //Crear producto
+    public static Producto generarProducto() {
+        String nombre = RobotsUtils.generarNombreProducto();
+        float precio = (float) RobotsUtils.generarNumeroAleatorio(20);
+        return new Producto(nombre, precio);
     }
 
     @Override
